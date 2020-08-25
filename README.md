@@ -120,3 +120,16 @@ public class nana extends HttpServlet{
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
 ```
+
+11. 하지만! 이렇게 할 필요 없다. 간편해졌다. 서블릿 3.0으로 오면서!  
+12. web.xml에서 metadata-complete="true"로 되어있는걸 false로 설정해주고 서블릿, 서블릿 매핑 내용을 지워준다.  
+13. 다음 아래와 같이 어노테이션을 추가해준다.
+```
+@WebServlet("/hi")
+public class nana extends HttpServlet{
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		out.println("hello");
+	}
+}
+```
