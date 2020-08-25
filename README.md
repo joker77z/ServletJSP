@@ -83,3 +83,7 @@ PrintWriter out = response.getWriter();
 out.println("Hello Servlet");
 
 PrintWriter는 다국어를 지원한다. 우리는 한국어라서 Writer를 써도 된다.
+
+## 이클립스를 함께 사용해서 개발진행
+https://www.youtube.com/watch?v=b_YnVlJmZ7Q&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=10
+
