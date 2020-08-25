@@ -23,7 +23,7 @@ TOMCAT 설명 : https://namu.wiki/w/%ED%86%B0%EC%BA%A3
 
 5. 바탕화면에 jsp 폴더 만들고 nana.java 를 만든다. 내용은 아래와 같다.  
 
-</
+/
 
 	import javax.servlet.*;
 	import javax.servlet.http.*;
@@ -38,7 +38,7 @@ TOMCAT 설명 : https://namu.wiki/w/%ED%86%B0%EC%BA%A3
 			System.out.println("hello Servlet");
 		}
 	}
-/>
+	
 
 그 다음에 cmd에서 cd [경로] 를 이용해서 바탕화면에 jsp 폴더내로 이동하고  
      javac       -cp   -cp "C:\Users\CAD support depart\Downloads\apache-tomcat-9.0.37-windows-x64\apache-tomcat-9.0.37\lib\servlet-api.jar" nana.java  
