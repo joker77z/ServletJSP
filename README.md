@@ -44,4 +44,24 @@ TOMCAT 설명 : https://namu.wiki/w/%ED%86%B0%EC%BA%A3
      javac       -cp   -cp "C:\Users\CAD support depart\Downloads\apache-tomcat-9.0.37-windows-x64\apache-tomcat-9.0.37\lib\servlet-api.jar" nana.java  
 (자바컴파일러)  (api를 불러올 경로)                                          								    (파일이름)
   
-6. dir을 쳐보면 nana.class 파일이 생성된 것을 알 수 있다.
+6. dir을 쳐보면 nana.class 파일이 생성된 것을 알 수 있다.  
+  
+예행연습을 끝냈으니 제대로 시작할 시간  
+1. apache-tomcat-9.0.37\webapps\ROOT\WEB-INF 에 classes라는 폴더를 만들고 그 폴더안에 nana.class 파일을 넣는다.  
+2. 그 다음 web.xml 파일을 수정하는데 아래와 같이 입력해 넣는다.
+
+
+/
+
+	<servlet>
+		<servlet-name>na</servlet-name>
+		<servlet-class>nana</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>na</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+	~~Welcome to Tomcat~~
+  
+3. 인터넷 주소에 http://localhost:8080/hello 라고 입력하면 nana.class 파일을 읽어온다.
