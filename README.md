@@ -66,3 +66,20 @@ TOMCAT 설명 : https://namu.wiki/w/%ED%86%B0%EC%BA%A3
   
 3. 인터넷 주소에 http://localhost:8080/hello 라고 입력하면 nana.class 파일을 읽어온다.  
 (이 때 빈 공백화면이 뜨면 정상이고 tomcat cmd창을 보면 hello Servlet 문구가 나오는 것을 볼 수 있는데 우리가 서버 콘솔쪽으로 메시지를 보냈기 떄문이다.)  
+  
+4. 이제 클라이언트(웹)쪽에 글자를 송출해보자.  
+5. classes 폴더 안에 있는 nana.java 파일을 오픈하고 아래 코드를 입력한다.  
+
+		OutputStream os = response.getOutputStream();
+		PrintStream out = new PrintStream(os, true);
+		out.println("Hello Servlet!!");
+
+6. 다시 java -> class 파일로 되게 컴파일한다.(아직 이클립스 사용전이라는 가정하에 불편하게 하는 것)  
+7. tomcat이 다시 읽을 수 있게 tomcat 껐다가 startup.bat 다시 킨다.  
+8. http://localhost:8080/hello 다시 접속했더니 문구가 나온다.  
+
+* nana.java에 입력했던 문구를 수정할 수도 있다. PrintStream을 사용하는 것이 아니라 PrintWriter를 사용하는 방법.
+PrintWriter out = response.getWriter();
+out.println("Hello Servlet");
+
+PrintWriter는 다국어를 지원한다. 우리는 한국어라서 Writer를 써도 된다.
