@@ -84,6 +84,39 @@ out.println("Hello Servlet");
 
 PrintWriter는 다국어를 지원한다. 우리는 한국어라서 Writer를 써도 된다.
 
+  
+
 ## 이클립스를 함께 사용해서 개발진행
 https://www.youtube.com/watch?v=b_YnVlJmZ7Q&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=10
 
+1. enterprise 용 이클립스 설치  
+2. JSPprj 라는 프로젝트를 만든다.  
+3. Webcontent가 기본 루트인데 index.html 을 만들고 실행을 해보니까 루트명에 JSPprj가 들어가있다. 이걸 빼기 위해서 프로젝트 - 우클릭 - 프로퍼티 들어가서 [Web Project Settings]에서 Context root에 /를 입력해준다.  
+4. 그리고나서 서버를 중지시키고 [Servers] 하위에 있는 JSPprj를 삭제한뒤 다시 CTRL+F11 해준다.  
+5. URL이 ------/index.html 만 나오는 것을 확인할 수 있다.  
+6. 그 다음 java소스는 Java Resources > src에 만들 것이다.  
+7. 여기서 nana 클래스 파일을 작성하면서 package 개념을 같이 공부하기 위해 com.parktaejoon.web 을 써주자.  
+8. 다음 nana extends 다음 http정도 쓰고나서 ctrl+space누르면 자동완성으로 추천해주는데 HttpServlet 이 나오도록 하자. 
+
+```
+public class nana extends HttpServlet{
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		PrintWriter out = resp.getWriter();
+		out.println("hello");
+	}
+}
+```
+
+9. nana라는 서블릿 클래스를 매핑해야 한다. (주소창에 hello 쳐도 nana라는 창이 나오게)  
+10. web.xml 파일을 WebContent > WEB-INF 안에 넣고 더블클릭해서 수정으로 들어가서 아래와 같이 바꿔준다.
+```
+	<servlet>
+		<servlet-name>na</servlet-name>
+		<servlet-class>com.parktaejoon.web.nana</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>na</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+```
