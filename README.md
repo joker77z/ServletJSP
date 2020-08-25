@@ -64,4 +64,5 @@ TOMCAT 설명 : https://namu.wiki/w/%ED%86%B0%EC%BA%A3
 	</servlet-mapping>
 	~~Welcome to Tomcat~~
   
-3. 인터넷 주소에 http://localhost:8080/hello 라고 입력하면 nana.class 파일을 읽어온다.
+3. 인터넷 주소에 http://localhost:8080/hello 라고 입력하면 nana.class 파일을 읽어온다.  
+(이 때 빈 공백화면이 뜨면 정상이고 tomcat cmd창을 보면 hello Servlet 문구가 나오는 것을 볼 수 있는데 우리가 서버 콘솔쪽으로 메시지를 보냈기 떄문이다.)  
