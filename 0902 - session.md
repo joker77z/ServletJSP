@@ -14,3 +14,21 @@ application은 모든 브라우저를 공유했다. 반대로 session은 브라�
 2. 다른 브라우저에서 3을 입력하고 = 를 누른다. 에러가 뜬다.!
 
 이런식으로 session은 해당 브라우저에서만 값이 공유된다.
+
+코드는 아래와 같다.
+application을 session으로만 변경해줬다.
+```
+//		ServletContext application = request.getServletContext();
+		HttpSession session = request.getSession(); // servlet > session
+    
+    //			int x = (Integer)application.getAttribute("value2");
+			int x = (Integer)session.getAttribute("value2");
+      
+      //			String oper = (String)application.getAttribute("operator");
+			String oper = (String)session.getAttribute("operator");
+      
+      //			application.setAttribute("value2", value);
+//			application.setAttribute("operator", op);
+			session.setAttribute("value2", value);
+			session.setAttribute("operator", op);
+```
