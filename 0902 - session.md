@@ -32,3 +32,5 @@ application을 session으로만 변경해줬다.
 			session.setAttribute("value2", value);
 			session.setAttribute("operator", op);
 ```
+
+https://www.youtube.com/watch?v=q9nQCnM4NAI&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=28 - 9:07 세션에서 타임아웃 하기 위한 다양한 명령어들
