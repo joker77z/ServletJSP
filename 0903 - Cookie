@@ -1,0 +1,71 @@
+# 0903 - cookie
+
+참조 URL :https://www.javatpoint.com/cookies-in-servlet
+https://opentutorials.org/module/3569/21213
+
+1. 화면에 이름을 입력하고 [go] 버튼을 누르면 쿠키값을 클라이언트에게 전달하면서 다음화면으로 이름에 입력했던 값과 [go]버튼이 나온다.
+2. 화면에 [go]버튼을 다시 누르면 쿠키값만 나온다.
+
+즉, 총 3개의 화면이다.
+1. HTML 파일 : 이름 입력 칸과 GO 버튼
+2. CLASS 파일 : 입력받았던 이름 값과 GO버튼
+3. CLASS 파일 : 저장했던 쿠키값이 나온다.
+
+```
+1. HTML파일
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/test" method="post">
+		<label>your name</label>
+		<input type="text" name="username" />
+		<input type="submit" value="go" />
+	</form>
+</body>
+</html>
+```
+
+```
+
+
+@WebServlet("/test")
+public class cookieSimpleTest extends HttpServlet{
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		String n = request.getParameter("username");
+		PrintWriter out = response.getWriter();
+		out.print("welcome" + n);
+		
+		Cookie c1 = new Cookie("uname3", n);
+		response.addCookie(c1); //클라이언트에게 전송
+//		response.getWriter().print(String.valueOf(c1)); // 이렇게 추출이 안되네.. > 지금 생각해보면 당연히 안됨!
+//    값 추출 명령어는 여기를 참조. https://opentutorials.org/module/3569/21213
+		
+		out.print("<form action='/test2'/>");
+		out.print("<input type='submit' value='go'/>");
+		out.print("</form>");
+		
+	}
+}
+```
+
+```
+
+@WebServlet("/test2")
+public class cookieSimpleTestB extends HttpServlet{
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie cookies[] = request.getCookies();
+		for(Cookie c : cookies) {
+			if(c.getName().equals("uname3"))
+				response.getWriter().print(c.getValue());
+		}
+	}
+}
+
+```
