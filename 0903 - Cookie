@@ -69,3 +69,91 @@ public class cookieSimpleTestB extends HttpServlet{
 }
 
 ```
+
+쿠키 업그레이드
+https://www.youtube.com/watch?v=ONtMvVocGy8&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd&index=29&ab_channel=%EB%89%B4%EB%A0%89%EC%B2%98
+```
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/test")
+public class test extends HttpServlet{
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String number_ = request.getParameter("num");
+		String operator1 = request.getParameter("operator");
+		
+		Cookie valueCookie = new Cookie("savevalue", number_);
+		Cookie opCookie = new Cookie("operator", operator1);
+		PrintWriter out = response.getWriter();
+		//쿠키를 읽는다.
+		Cookie cookies[] = request.getCookies();
+		
+		int number = 0;
+		if(!number_.equals("")) {
+			number = Integer.parseInt(number_);
+		}
+		
+		// = 를 눌렀을 때
+		if(operator1.equals("=")) {
+			
+			int x = 0;
+			for(Cookie c : cookies) {
+				if(c.getName().equals("savevalue"))
+				{
+					x = Integer.parseInt(c.getValue());
+					break;
+				}
+			}
+			int y = number;
+			
+			String operator11 = "";
+			for(Cookie c : cookies) {
+				if(c.getName().equals("operator"))
+				{
+					operator11 = c.getValue();
+					break;
+				}
+			}
+			
+			int result0 = 0;
+			if(operator11.equals("+")) {
+				result0 = x + y;
+			} else {
+				result0 = x - y;
+			}
+			out.println(result0);
+			
+			
+		} else { // +, - 를 눌렀을 때 숫자가 쿠키로 저장된다.
+			response.addCookie(valueCookie);
+			response.addCookie(opCookie);
+		}
+	}
+}
+```
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/test" method="post">
+		<label>test</label>
+		<input type="text" name="num" />
+		<input type="submit" name="operator" value="+" />
+		<input type="submit" name="operator" value="-" />
+		<input type="submit" name="operator" value="=" />
+	</form>
+</body>
+</html>
+```
